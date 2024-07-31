@@ -1,6 +1,8 @@
 import './App.css';
 import React, {useState, useEffect} from 'react'
 import {getAll, deleteById, post, put} from './memdb'
+import CustomerList from './CustomerList';
+import CustomerAddUpdateForm from './CustomerAddUpdateForm';
 
 function App() {
   let blank = { "id": -1, "name": "", "email": "", "password": "" };
@@ -58,75 +60,21 @@ function App() {
 
   return (
     <div>
-      <div align="center">
-        <h4>Customer List</h4>
-        <table className="customer-list">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Pass</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              customers.map((item, index) =>
-                <tr key={item.id} 
-                className={(item.id === formObject.id) ? 'selected': ''}
-                onClick={() => {handleListClick(item)}}>
-                <td>{item.name}</td>
-                <td>{item.email}</td>
-                <td>{item.password}</td>
-              </tr>)
-            }
-          </tbody>
-        </table>
-      </div>
-      <div align="center">
-        <form>
-          <table className="customer-edit">
-            <h4>{mode}</h4>
-            <tbody>
-              <tr>
-                <td>Name:</td>
-                <td><input 
-                type="text"
-                name="name"
-                onChange={(e) => handleInputChange(e)}
-                value={formObject.name}
-                placeholder="Customer Name"></input></td>
-              </tr>
-              <tr>
-                <td>Email:</td>
-                <td><input 
-                type="text"
-                name="email"
-                onChange={(e) => handleInputChange(e)}
-                value={formObject.email}
-                placeholder="name@company.com"></input></td>
-              </tr>
-              <tr>
-                <td>Pass:</td>
-                <td><input 
-                type="text"
-                name="password"
-                onChange={handleInputChange}
-                value={formObject.password}
-                placeholder="password"></input></td>
-              </tr>
-              <tr>
-                <td>
-                  <input type="button" value="Delete" onClick={onDeleteClick}/>
-                  <input type="button" value="Save" onClick={onSaveClick}/>
-                  <input type="button" value="Cancel" onClick={onCancelClick}/>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </form>
-      </div>
+      <CustomerList 
+      customers={customers} 
+      formObject={formObject} 
+      handleListClick={handleListClick} />
+      <CustomerAddUpdateForm
+      mode={mode}
+      handleInputChange={handleInputChange}
+      formObject={formObject}
+      onDeleteClick={onDeleteClick}
+      onSaveClick={onSaveClick}
+      onCancelClick={onCancelClick}
+      />
     </div>
   );
 }
 
 export default App;
+
