@@ -27,6 +27,10 @@ function App() {
 
   const onDeleteClick = function() {
     console.log('in onDeleteClick()');
+    if (formObject.id >= 0) {
+      deleteById(formObject.id);
+      setFormObject(blank);
+    }
   }
 
   const onSaveClick = function() {
