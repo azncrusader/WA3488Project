@@ -1,9 +1,10 @@
 import './App.css';
-import members from './custodb'
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
+import {getAll, get, deleteById, post, put, getArrayIndexForId, getNextId} from './memdb'
 
 function App() {
   let blank = { "id": -1, "name": "", "email": "", "password": "" };
+  const [customers, setCustomers] = useState([]);
   const [formObject, setFormObject] = useState(blank);
   let mode = (formObject.id >= 0) ? "Update" : "Add";
 
@@ -20,6 +21,8 @@ function App() {
   }
   const onCancelClick = function() {
     console.log('in onCancelClick()');
+    if (formObject.id >= 0)
+      setFormObject(blank);
   }
 
   const onDeleteClick = function() {
@@ -30,7 +33,14 @@ function App() {
     console.log('in onSaveClick()');
   }
 
-  
+  const getCustomers = function() {
+    console.log("in getCustomers()");
+    setCustomers(getAll());
+  }
+
+  useEffect( ()=>{
+    getCustomers();
+  },[])
 
   return (
     <div>
@@ -46,7 +56,7 @@ function App() {
           </thead>
           <tbody>
             {
-              members.map((item, index) =>
+              customers.map((item, index) =>
                 <tr key={item.id} 
                 className={(item.id === formObject.id) ? 'selected': ''}
                 onClick={() => {handleListClick(item)}}>
