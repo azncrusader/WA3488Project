@@ -1,6 +1,6 @@
 import './App.css';
 import React, {useState, useEffect} from 'react'
-import {getAll, get, deleteById, post, put, getArrayIndexForId, getNextId} from './memdb'
+import {getAll, deleteById, post, put} from './memdb'
 
 function App() {
   let blank = { "id": -1, "name": "", "email": "", "password": "" };
@@ -10,6 +10,11 @@ function App() {
 
   const handleInputChange = function(event) {
     console.log('in handleInputChange()');
+    const name = event.target.name;
+    const value = event.target.value;
+    let newFormObject = {...formObject}
+    newFormObject[name] = value;
+    setFormObject(newFormObject);
   }
 
   const handleListClick = function(item) {
@@ -35,6 +40,11 @@ function App() {
 
   const onSaveClick = function() {
     console.log('in onSaveClick()');
+    if (mode === "Add")
+      post(formObject);
+    else
+      put(formObject.id, formObject);
+    setFormObject(blank);
   }
 
   const getCustomers = function() {
@@ -82,7 +92,7 @@ function App() {
                 <td><input 
                 type="text"
                 name="name"
-                onChange={handleInputChange}
+                onChange={(e) => handleInputChange(e)}
                 value={formObject.name}
                 placeholder="Customer Name"></input></td>
               </tr>
@@ -90,8 +100,8 @@ function App() {
                 <td>Email:</td>
                 <td><input 
                 type="text"
-                name="name"
-                onChange={handleInputChange}
+                name="email"
+                onChange={(e) => handleInputChange(e)}
                 value={formObject.email}
                 placeholder="name@company.com"></input></td>
               </tr>
@@ -99,7 +109,7 @@ function App() {
                 <td>Pass:</td>
                 <td><input 
                 type="text"
-                name="name"
+                name="password"
                 onChange={handleInputChange}
                 value={formObject.password}
                 placeholder="password"></input></td>
