@@ -72,6 +72,9 @@ function App() {
       onSaveClick={onSaveClick}
       onCancelClick={onCancelClick}
       />
+      <div class="shaq-container">
+        <img src="./shaqseal.jpg" alt="Funny Shaq" class="shaq-image"/>
+      </div>
     </div>
   );
 }

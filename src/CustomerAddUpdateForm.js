@@ -2,8 +2,8 @@ function CustomerAddUpdateForm(params){
     return (
         <div align="center">
             <form>
+            <h4 align="center">{params.mode}</h4>
             <table className="customer-edit">
-                <h4>{params.mode}</h4>
                 <tbody>
                 <tr>
                     <td>Name:</td>
@@ -33,7 +33,7 @@ function CustomerAddUpdateForm(params){
                     placeholder="password"></input></td>
                 </tr>
                 <tr>
-                    <td>
+                    <td colSpan="2" className="buttons">
                     <input type="button" value="Delete" onClick={params.onDeleteClick}/>
                     <input type="button" value="Save" onClick={params.onSaveClick}/>
                     <input type="button" value="Cancel" onClick={params.onCancelClick}/>

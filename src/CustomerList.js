@@ -1,7 +1,14 @@
 function CustomerList(params) {  
     return(  
         <div align="center">
-            <h4>Customer List</h4>
+            <div className="title-container">
+                <h4 className="scrolling-title">Customer List &nbsp; Customer List &nbsp; Customer List &nbsp; Customer List &nbsp; Customer List &nbsp;
+                Customer List &nbsp; Customer List &nbsp; Customer List &nbsp; Customer List &nbsp; Customer List &nbsp;  
+                </h4>
+                <h4 className="scrolling-title">Customer List &nbsp; Customer List &nbsp; Customer List &nbsp; Customer List &nbsp; Customer List &nbsp;
+                Customer List &nbsp; Customer List &nbsp; Customer List &nbsp; Customer List &nbsp; Customer List    
+                </h4>
+            </div>
             <table className="customer-list">
             <thead>
                 <tr>
